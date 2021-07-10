@@ -11,3 +11,22 @@
     }
   }
 }
+
+.social-block__list {
+  transition: opacity 0.15s ease-out;
+}
+
+.social-block__link {
+
+  &--fb {
+    transition: opacity 0.2s ease-in 0.1s, transform 0.2s ease-in 0.1s;
+  }
+
+  &--insta {
+    transition: opacity 0.2s ease-in 0.2s, transform 0.2s ease-in 0.2s;
+  }
+
+  &--vk {
+    transition: opacity 0.2s ease-in 0.3s, transform 0.2s ease-in 0.3s;
+  }
+}
