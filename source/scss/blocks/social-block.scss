@@ -1,5 +1,6 @@
 .social-block {
   position: relative;
+  transition: opacity 0.15s ease-out;
 
   &:hover {
     .social-block__list {
@@ -211,6 +212,7 @@
   }
 
   &--fb {
+    transition: opacity 0.2s ease-in 0.1s, transform 0.2s ease-in 0.1s;
     svg {
       width: 0.8rem;
       height: 1.7rem;
@@ -223,6 +225,7 @@
   }
 
   &--insta {
+    transition: opacity 0.2s ease-in 0.2s, transform 0.2s ease-in 0.2s;
     svg {
       width: 1.5rem;
       height: 1.5rem;
@@ -235,6 +238,7 @@
   }
 
   &--vk {
+    transition: opacity 0.2s ease-in 0.3s, transform 0.2s ease-in 0.3s;
     svg {
       width: 1.7rem;
       height: 1rem;
