@@ -35,12 +35,18 @@
   &::before {
     @include center;
     content: "";
-    width: 100%;
-    height: 100%;
+    width: 10%;
+    height: 10%;
     border-radius: 50%;
     background-color: $c-light;
     border: 2px solid $c-light;
     z-index: -1;
+    transition: 1s cubic-bezier(0.1, 0.97, 0.57, 1.28);
+  }
+
+  body.loaded &::before {
+    width: 100%;
+    height: 100%;
   }
 
   svg {
