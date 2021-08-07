@@ -10444,14 +10444,18 @@ __webpack_require__.r(__webpack_exports__);
 
 class FullPageScroll {
   constructor() {
+    this.STORY_SCREEN = 1;
+    this.PRIZES_SCREEN = 2;
     this.THROTTLE_TIMEOUT = 1000;
     this.scrollFlag = true;
     this.timeout = null;
 
     this.screenElements = document.querySelectorAll(`.screen:not(.screen--result)`);
     this.menuElements = document.querySelectorAll(`.page-header__menu .js-menu-link`);
+    this.background = document.querySelector(`.screen__background`);
 
     this.activeScreen = 0;
+    this.prevActiveScreen = 0;
     this.onScrollHandler = this.onScroll.bind(this);
     this.onUrlHashChengedHandler = this.onUrlHashChanged.bind(this);
   }
@@ -10483,17 +10487,18 @@ class FullPageScroll {
 
   onUrlHashChanged() {
     const newIndex = Array.from(this.screenElements).findIndex((screen) => location.hash.slice(1) === screen.id);
+    this.prevActiveScreen = this.activeScreen;
     this.activeScreen = (newIndex < 0) ? 0 : newIndex;
     this.changePageDisplay();
   }
 
   changePageDisplay() {
-    this.changeVisibilityDisplay();
+    this.changeVisibilityWithConditionDisplay();
     this.changeActiveMenuItem();
     this.emitChangeDisplayEvent();
   }
 
-  changeVisibilityDisplay() {
+  changeActiveScreen() {
     this.screenElements.forEach((screen) => {
       screen.classList.add(`screen--hidden`);
       screen.classList.remove(`active`);
@@ -10502,6 +10507,19 @@ class FullPageScroll {
     setTimeout(() => {
       this.screenElements[this.activeScreen].classList.add(`active`);
     }, 100);
+  }
+
+
+  changeVisibilityWithConditionDisplay() {
+    if (this.activeScreen === this.PRIZES_SCREEN && this.prevActiveScreen === this.STORY_SCREEN) {
+      this.background.classList.add(`active`);
+      setTimeout(() => {
+        this.background.classList.remove(`active`);
+        this.changeActiveScreen();
+      }, 500);
+    } else {
+      this.changeActiveScreen();
+    }
   }
 
   changeActiveMenuItem() {
